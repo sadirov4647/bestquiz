@@ -43,9 +43,9 @@ startGame = () => {
     questionCounter = 0;
     score = 0;
     availableQuestion = [...questions];
-    console.log(availableQuestion);
     getQuestion()
 };
+
 getQuestion = () => {
     questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuestion.length);
@@ -53,9 +53,9 @@ getQuestion = () => {
     question.innerText = currentQuestion.question;
 
     choices.forEach(choice => {
-        const number = choice.dataset['number'];
-        choice.innerText = currentQuestion['choice' + number]
-        console.log(number);
+        const number = choice.dataset["number"];
+        choice.innerText = currentQuestion["choice" + number];
+        // console.log(number);
     });
 }
 
