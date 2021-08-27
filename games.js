@@ -1,7 +1,7 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const questionCounterText = document.getElementById("question-counter");
-const scoreText = document.getElementById("score")
+const scoreText = document.getElementById("score");
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -53,6 +53,8 @@ getQuestion = () => {
         return window.location.assign('/end.html');
     }
     questionCounter++;
+    questionCounterText.innerText = `${questionCounter}/${max_question}`;
+
     const questionIndex = Math.floor(Math.random() * availableQuestion.length);
     currentQuestion = availableQuestion[questionIndex];
     question.innerText = currentQuestion.question;
@@ -76,6 +78,10 @@ choices.forEach(choice => {
         const selectedAnswer = selectedChoice.dataset["number"];
 
         const classToApply = selectedAnswer === currentQuestion.answer ? "correct" : "incorrect";
+
+        if (classToApply === "correct") {
+            incrementScore(correct_bonus)
+        }
         selectedChoice.parentElement.classList.add(classToApply);
 
         setTimeout(() => {
@@ -84,6 +90,12 @@ choices.forEach(choice => {
         }, 1000)
 
     })
-})
+});
+
+incrementScore = (num) => {
+    console.log(num);
+    sum += num;
+    scoreText.innerText = score
+}
 
 startGame()
