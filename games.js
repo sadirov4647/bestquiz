@@ -34,7 +34,7 @@ let questions = [
         choice4: "Ko'p go'sht yepqo'yganimiz uchun",
         answer: 4
     }
-]
+];
 
 
 const correct_bonus = 10;
@@ -70,32 +70,29 @@ getQuestion = () => {
 
 choices.forEach(choice => {
     choice.addEventListener("click", e => {
-        if (!acceptingAnswers) {
-            return;
-        }
+        if (!acceptingAnswers) return;
         acceptingAnswers = false;
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset["number"];
 
-        const classToApply = selectedAnswer === currentQuestion.answer ? "correct" : "incorrect";
-
+        const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
         if (classToApply === "correct") {
-            incrementScore(correct_bonus)
+            incrementScore(correct_bonus);
         }
+
         selectedChoice.parentElement.classList.add(classToApply);
 
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
             getQuestion();
-        }, 1000)
+        }, 1000);
 
-    })
+    });
 });
 
-incrementScore = (num) => {
-    console.log(num);
-    sum += num;
-    scoreText.innerText = score
+incrementScore = num => {
+    score += num;
+    scoreText.innerText = score;
 }
 
 startGame()
