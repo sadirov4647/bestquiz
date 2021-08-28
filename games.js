@@ -1,7 +1,10 @@
+// 'use strict'
+
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-const questionCounterText = document.getElementById("question-counter");
+const progressText = document.getElementById("progress-text");
 const scoreText = document.getElementById("score");
+const progresBarFull = document.querySelector(".progress-bar-full");
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -53,7 +56,9 @@ getQuestion = () => {
         return window.location.assign('/end.html');
     }
     questionCounter++;
-    questionCounterText.innerText = `${questionCounter}/${max_question}`;
+    progressText.innerText = `Question ${questionCounter}/${max_question}`;
+
+    progresBarFull.style.width = `${(questionCounter / max_question) * 100}%`;
 
     const questionIndex = Math.floor(Math.random() * availableQuestion.length);
     currentQuestion = availableQuestion[questionIndex];
@@ -76,7 +81,9 @@ choices.forEach(choice => {
         const selectedAnswer = selectedChoice.dataset["number"];
 
         const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+        console.log(classToApply)
         if (classToApply === "correct") {
+            selectedChoice.parentElement.classList.add(classToApply);
             incrementScore(correct_bonus);
         }
 
