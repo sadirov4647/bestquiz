@@ -3,6 +3,6 @@ const ul = document.querySelector(".high-score-list");
 const moreLi = JSON.parse(localStorage.getItem("highScores")) || [];
 
 
-console.log(moreLi.map(score => {
-    console.log(`${score.name}-${score.score}`)
-}));
+ul.innerHTML = moreLi.map(score => {
+    return `<li class="high-score">${score.name} - ${score.score}</li>`
+}).join("");
